@@ -1,0 +1,56 @@
+#pragma once
+
+#include <string>
+#include <string_view>
+
+#include "DrawingSurface.h"
+
+namespace circleAssignment {
+
+class DrawingCommand {
+public:
+	virtual void executeCommand(DrawingSurface &surfacestring);
+	virtual ~DrawingCommand() {
+	}
+
+};
+
+class CommandStart: DrawingCommand {
+	std::string_view name;
+	unsigned width;
+	unsigned height;
+
+public:
+
+	CommandStart(std::string_view name_, const unsigned width_,			const unsigned height_) {
+		name = name_;
+		width = width_;
+		height = height_;
+
+	}
+
+	void executeCommand(DrawingSurface &surfacestring);
+};
+
+class CommandCircle: DrawingCommand {
+	unsigned radius;
+	unsigned centerX;
+	unsigned centerY;
+
+public:
+	CommandCircle(const unsigned radius_, const unsigned centerX_,
+			const unsigned centerY_) {
+		radius = radius_;
+		centerX = centerX_;
+		centerY = centerY_;
+	}
+
+	void executeCommand(DrawingSurface &surfacestring);
+};
+
+class CommandExit: DrawingCommand {
+public:
+	void executeCommand(DrawingSurface &surfacestring);
+};
+
+}

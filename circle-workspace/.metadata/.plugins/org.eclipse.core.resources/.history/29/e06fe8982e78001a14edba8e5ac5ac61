@@ -1,0 +1,67 @@
+#include <string>
+#include <queue>
+
+#include "Commands.h"
+#include "CommandQueue.h"
+#include "DrawingSurface.h"
+
+using namespace std;
+
+using namespace commands;
+using namespace commandqueue;
+
+namespace drawing {
+
+void DrawingSurface::operator()(CommandQueue &commandQueue) {
+
+	for (;;) {
+		DrawingCommand command = commandQueue.pop();
+
+		string commandType = command.getType();
+		if ("Start" == commandType) {
+			save();
+
+		} else if ("Circle" == commandType) {
+
+		} else if ("Exit" == commandType) {
+			save();
+			return;
+		} else {
+			// Invalid command, drop dead for now, in real life handle it with an exception
+			exit(-1);
+		}
+
+	}
+}
+
+void DrawingSurface::start(const string name, const unsigned width,
+		const unsigned height) {
+
+	save();
+
+	createDrawingSurface(width, height);
+}
+
+void DrawingSurface::save() {
+
+	if (dirty) {
+		saveDrawingSurface(name);
+	}
+
+	dirty = false;
+}
+
+void DrawingSurface::circle(const unsigned radius, const unsigned centerX,
+		const unsigned centerY) {
+
+	dirty = true;
+}
+
+void DrawingSurface::createDrawingSurface(const unsigned width,
+		const unsigned height) {
+	dirty = false;
+}
+void DrawingSurface::saveDrawingSurface(string name) {
+}
+
+}

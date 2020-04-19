@@ -1,0 +1,22 @@
+#include <string>
+#include <queue>
+
+#include "Commands.h"
+
+#include "DrawingSurface.h"
+
+using namespace std;
+
+using namespace commands;
+
+namespace drawing {
+
+void DrawingSurface::operator()(queue<DrawingCommand> &commandQueue);
+
+void DrawingSurface::start(const string name, const unsigned width,
+		const unsigned height);
+void DrawingSurface::save();
+void DrawingSurface::circle(const unsigned radius, const unsigned centerX,
+		const unsigned centerY);
+
+}

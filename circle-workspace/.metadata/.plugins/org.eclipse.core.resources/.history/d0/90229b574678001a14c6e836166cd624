@@ -1,0 +1,22 @@
+#pragma once
+#include <string>
+#include <queue>
+#include <mutex>
+
+#include "Commands.h"
+
+using namespace std;
+
+namespace circleAssignment {
+
+class CommandQueue {
+protected:
+	mutex queueMutex;
+	queue<DrawingCommand> commandQueue;
+
+public:
+	void push(const DrawingCommand &command);
+	DrawingCommand pop();
+};
+
+}

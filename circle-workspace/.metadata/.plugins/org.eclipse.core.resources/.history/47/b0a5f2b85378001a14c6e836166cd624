@@ -1,0 +1,55 @@
+#include <string>
+#include <iostream>
+#include <regex>
+
+//#include "Commands.h"
+#include "CommandQueue.h"
+
+#include "HandleCommandLine.h"
+
+using namespace std;
+
+void HandleCommandLine::operator()(CommandQueue &commandQueue) {
+
+	cout << "Please enter command" << endl;
+	for (std::string line; std::getline(std::cin, line);) {
+		std::regex reStart("start\(([a-zA-Z ]+),(\d+),(\d+)\)");
+		std::regex reCircle("circle\((\d+),(\d+),(\d+)\)");
+		std::regex reExit("exit");
+
+		try {
+			string command;
+			std::smatch match;
+			if (std::regex_search(line, match, reStart) && match.size() > 3) {
+				string name = match.str(1);
+				string widthS = match.str(2);
+				string heightS = match.str(3);
+				unsigned width = std::stoul(widthS);
+				unsigned height = std::stoul(heightS);
+
+//				commandQueue.push(std::move(std::unique_ptr<DrawingCommand>{new CommandStart(name, width, height)}));
+				commandQueue.push(std::unique_ptr<DrawingCommand>{new CommandStart(name, width, height)});
+			} else if (std::regex_search(line, match, reCircle)
+					&& match.size() > 3) {
+				string radiusS = match.str(1);
+				string centerXS = match.str(2);
+				string centerYS = match.str(3);
+				unsigned radius = std::stoul(radiusS);
+				unsigned centerX = std::stoul(centerXS);
+				unsigned centerY = std::stoul(centerYS);
+
+				commandQueue.push(CommandCircle(radius, centerX, centerY));
+			} else if (std::regex_search(line, match, reExit)
+					&& match.size() > 3) {
+				commandQueue.push(CommandExit());
+
+				return;
+			}
+		} catch (std::regex_error &e) {
+			// Syntax error in the regular expression
+		}
+
+		cout << "Please enter command" << endl;
+	}
+
+}

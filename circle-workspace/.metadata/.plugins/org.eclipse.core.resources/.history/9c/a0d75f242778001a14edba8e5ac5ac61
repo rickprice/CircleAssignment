@@ -1,0 +1,21 @@
+#pragma once
+#include <string>
+#include <queue>
+
+#include "Commands.h"
+
+using namespace std;
+
+using namespace commands;
+
+namespace commandLine {
+
+class HandleCommandLine {
+public:
+    void operator()(queue<DrawingCommand> &commandQueue);
+
+protected:
+
+};
+
+}

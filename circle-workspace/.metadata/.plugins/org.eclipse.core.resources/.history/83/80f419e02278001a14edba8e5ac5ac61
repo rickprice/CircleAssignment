@@ -1,0 +1,18 @@
+#include <string>
+#include <queue>
+
+#include "Commands.h"
+
+#include "HandleCommandLine.h"
+
+using namespace std;
+
+using namespace commands;
+
+namespace commandLine {
+
+    void HandleCommandLine::operator()(queue<DrawingCommand> &commandQueue) {
+
+    }
+
+}

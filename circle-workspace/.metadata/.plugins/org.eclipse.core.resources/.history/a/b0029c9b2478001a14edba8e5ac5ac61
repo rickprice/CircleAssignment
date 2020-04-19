@@ -1,0 +1,23 @@
+#pragma once
+#include <string>
+#include <queue>
+
+#include "Commands.h"
+
+using namespace std;
+
+using namespace commands;
+
+namespace commandQueue {
+
+class HandleCommandLine {
+protected:
+	queue<DrawingCommand> commandQueue;
+	mutex mutex;
+
+public:
+	void push(const DrawingCommand &command);
+	DrawingCommand &pop();
+};
+
+}

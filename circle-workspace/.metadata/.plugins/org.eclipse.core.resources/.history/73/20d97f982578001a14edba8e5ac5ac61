@@ -1,0 +1,21 @@
+#include <string>
+#include <queue>
+
+#include "Commands.h"
+
+#include "CommandQueue.h"
+
+using namespace std;
+
+using namespace commands;
+
+namespace commandQueue {
+
+void CommandQueue::push(const DrawingCommand &command) {
+}
+DrawingCommand& CommandQueue::pop() {
+
+	return new DrawingCommand();
+}
+
+}

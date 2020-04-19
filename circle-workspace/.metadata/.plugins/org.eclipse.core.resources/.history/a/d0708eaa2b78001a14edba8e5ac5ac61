@@ -1,0 +1,35 @@
+#pragma once
+#include<string>
+
+using namespace std;
+
+namespace commands {
+
+class DrawingCommand {
+
+};
+
+class CommandStart: DrawingCommand {
+	string name;
+	unsigned width;
+	unsigned height;
+
+	CommandStart(const string &name_,const unsigned width_,const unsigned height_) {
+		this.name = name_;
+		this.width = width_;
+		this.height = height_;
+
+	}
+};
+
+class CommandCircle: DrawingCommand {
+	unsigned radius;
+	unsigned centerX;
+	unsigned centerY;
+
+};
+
+class CommandExit: DrawingCommand {
+};
+
+}

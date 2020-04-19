@@ -1,0 +1,13 @@
+
+
+#include "Commands.h"
+
+using namespace std;
+
+using namespace commands;
+
+namespace drawing {
+
+    void DrawingSurface::operator()(queue<DrawingCommand> &commandQueue);
+
+}

@@ -1,0 +1,46 @@
+#include <string>
+#include <iostream>
+#include <regex>
+
+#include "Commands.h"
+#include "CommandQueue.h"
+
+#include "HandleCommandLine.h"
+
+using namespace std;
+
+using namespace commands;
+using namespace commandqueue;
+
+namespace commandLine {
+
+void HandleCommandLine::operator()(CommandQueue &commandQueue) {
+
+
+	cout << "Please enter command"<< endl;
+	for (std::string line; std::getline(std::cin, line);) {
+
+		try {
+		  std::regex re("Name: (.*)");
+		  std::smatch match;
+		  if (std::regex_search(subject, match, re) && match.size() > 1) {
+		    result = match.str(1);
+		  } else {
+		    result = std::string("");
+		  }
+		} catch (std::regex_error& e) {
+		  // Syntax error in the regular expression
+		}
+
+
+		std::cout << line << std::endl;
+
+
+	        cout << "Please enter command"<< endl;
+	    }
+
+
+
+}
+
+}

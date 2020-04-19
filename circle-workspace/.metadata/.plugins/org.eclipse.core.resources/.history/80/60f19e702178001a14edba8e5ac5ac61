@@ -1,0 +1,42 @@
+//============================================================================
+// Name        : CircleAssignment.cpp
+// Author      : Frederick Price
+// Version     :
+// Copyright   : BSD
+// Description : Hello World in C++, Ansi-style
+//============================================================================
+
+#include <string>
+#include <queue>
+#include <functional>
+#include <thread>
+
+#include "Commands.h"
+#include "DrawingSurface.h"
+#include "HandleCommandLine.h"
+
+using namespace std;
+
+using namespace commands;
+using namespace drawing;
+using namespace commandLine;
+
+
+#include <iostream>
+using namespace std;
+
+int main() {
+	queue<DrawingCommand> commandQueue;
+
+	HandleCommandLine commandLine = HandleCommandLine();
+	DrawingSurface drawingSurface = DrawingSurface();
+
+	        std::thread t1(std::ref(commandLine),std::ref(commandQueue));
+	        std::thread t2(std::ref(drawingSurface),std::ref(commandQueue));
+
+	        t1.join();
+	        t2.join();
+
+	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
+	return 0;
+}

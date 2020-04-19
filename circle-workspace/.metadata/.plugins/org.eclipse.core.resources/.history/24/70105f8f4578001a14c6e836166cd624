@@ -1,0 +1,28 @@
+#include <string>
+#include <queue>
+
+#include "Commands.h"
+
+#include "CommandQueue.h"
+
+using namespace std;
+
+using namespace commands;
+
+namespace commandqueue {
+
+void CommandQueue::push(const DrawingCommand &command) {
+	std::lock_guard<std::mutex> lockGuard(queueMutex);
+
+	commandQueue.push(command);
+}
+DrawingCommand CommandQueue::pop() {
+	std::lock_guard<std::mutex> lockGuard(queueMutex);
+
+	DrawingCommand returnValue = commandQueue.front();
+	commandQueue.pop();
+
+	return returnValue;
+}
+
+}

@@ -1,0 +1,15 @@
+class DrawingCommand {
+
+};
+
+class CommandStart : DrawingCommand {
+
+};
+
+class CommandCircle : DrawingCommand {
+
+};
+
+class CommandExit : DrawingCommand {
+
+};

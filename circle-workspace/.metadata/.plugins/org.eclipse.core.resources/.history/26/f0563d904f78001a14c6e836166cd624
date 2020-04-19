@@ -1,0 +1,31 @@
+#pragma once
+
+#include <string>
+#include <queue>
+#include <mutex>
+
+#include "Commands.h"
+
+class CommandQueue {
+
+	DrawingCommand test;
+
+	std::mutex queueMutex;
+	std::queue<DrawingCommand> commandQueue;
+
+public:
+	void push(DrawingCommand command) {
+		std::lock_guard<std::mutex> lockGuard(queueMutex);
+
+		commandQueue.push(command);
+	}
+
+	DrawingCommand pop() {
+		std::lock_guard<std::mutex> lockGuard(queueMutex);
+
+		DrawingCommand returnValue = commandQueue.front();
+		commandQueue.pop();
+
+		return returnValue;
+	}
+};

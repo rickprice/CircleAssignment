@@ -1,0 +1,26 @@
+#include <string>
+#include <queue>
+
+#include "Commands.h"
+
+#include "CommandQueue.h"
+
+using namespace std;
+
+namespace circleAssignment {
+
+void CommandQueue::push(std::shared_ptr<DrawingCommand> command) {
+	std::lock_guard<std::mutex> lockGuard(queueMutex);
+
+	commandQueue.push(command);
+}
+std::shared_ptr<DrawingCommand> CommandQueue::pop() {
+	std::lock_guard<std::mutex> lockGuard(queueMutex);
+
+	std::shared_ptr<DrawingCommand> returnValue = commandQueue.front();
+	commandQueue.pop();
+
+	return returnValue;
+}
+
+}

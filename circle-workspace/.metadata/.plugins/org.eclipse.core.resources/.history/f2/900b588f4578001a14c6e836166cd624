@@ -1,0 +1,23 @@
+#pragma once
+#include <string>
+#include <queue>
+
+#include "Commands.h"
+#include "CommandQueue.h"
+
+using namespace std;
+
+using namespace commands;
+using namespace commandqueue;
+
+namespace commandLine {
+
+class HandleCommandLine {
+public:
+	void operator()(CommandQueue &commandQueue);
+
+protected:
+
+};
+
+}

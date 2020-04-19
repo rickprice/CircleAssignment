@@ -1,0 +1,21 @@
+#pragma once
+#include <string>
+#include <queue>
+#include <mutex>
+#include <memory>
+
+#include "Commands.h"
+
+namespace circleAssignment {
+
+class CommandQueue {
+protected:
+	mutex queueMutex;
+	queue<shared_ptr<DrawingCommand>> commandQueue;
+
+public:
+	void push(const DrawingCommand &command);
+	DrawingCommand pop();
+};
+
+}

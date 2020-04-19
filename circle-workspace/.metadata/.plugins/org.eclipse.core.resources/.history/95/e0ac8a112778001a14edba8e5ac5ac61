@@ -1,0 +1,27 @@
+#pragma once
+#include <string>
+#include <queue>
+
+#include "Commands.h"
+
+using namespace std;
+
+using namespace commands;
+
+namespace drawing {
+
+class DrawingSurface {
+	bool dirty = false;
+
+public:
+    void operator()(queue<DrawingCommand> &commandQueue);
+protected:
+
+	void start(const string name, const unsigned width, const unsigned height);
+	void save();
+	void circle(const unsigned radius, const unsigned centerX,
+			const unsigned centerY);
+
+};
+
+}
